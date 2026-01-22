@@ -75,3 +75,27 @@ body {
   animation: bounce-slow 2s infinite;
 }
 
+@keyframes clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes counter-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.animate-clockwise {
+  animation: clockwise var(--duration, 20s) linear infinite;
+}
+
+.animate-counter-clockwise {
+  animation: counter-clockwise var(--duration, 20s) linear infinite;
+}
+
+.orbit-ring-hover:hover ~ .orbit-ring-item {
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+

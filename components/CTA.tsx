@@ -17,7 +17,7 @@ export default function CTA() {
         >
           {/* Background Decorative Circles */}
           <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#e68f86]/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
 
           <div className="relative z-10 max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight">
@@ -43,7 +43,7 @@ export default function CTA() {
                 />
               </div>
             </div>
-            <p className="mt-8 text-indigo-200 font-medium">
+            <p className="mt-8 text-[#dfdbd8] font-medium">
               Start your 14-day free trial. No credit card required.
             </p>
           </div>

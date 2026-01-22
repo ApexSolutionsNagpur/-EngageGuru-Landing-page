@@ -65,28 +65,28 @@ export default function Navbar() {
         <div className="md:hidden bg-white absolute top-full left-0 right-0 border-t py-6 px-6 space-y-4 shadow-xl">
           <Link
             href="#solutions"
-            className="block text-gray-600 hover:text-indigo-600"
+            className="block text-gray-600 hover:text-[#2d5790]"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Solutions
           </Link>
           <Link
             href="#features"
-            className="block text-gray-600 hover:text-indigo-600"
+            className="block text-gray-600 hover:text-[#2d5790]"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Features
           </Link>
           <Link
             href="#how-it-works"
-            className="block text-gray-600 hover:text-indigo-600"
+            className="block text-gray-600 hover:text-[#2d5790]"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             How it Works
           </Link>
           <Link
             href="#launch"
-            className="block bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold text-center"
+            className="block bg-[#2d5790] text-white px-6 py-3 rounded-xl font-semibold text-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Launch Your CRM Now

@@ -114,7 +114,7 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="p-8 bg-gray-50 rounded-3xl hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-indigo-100 group"
+              className="p-8 bg-gray-50 rounded-3xl hover:bg-white hover:shadow-xl transition-all border border-transparent hover:border-[#2d5790]/20 group"
             >
               <div className="w-14 h-14 bg-[#2d5790] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-100 group-hover:scale-110 transition-transform">
                 {feature.icon}
@@ -155,7 +155,7 @@ export default function Features() {
               </div>
               <p className="text-gray-500 text-sm">{feature.description}</p>
               <div className="absolute top-2 right-2">
-                <span className="text-[8px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full font-black uppercase tracking-tighter">AI Beta</span>
+                <span className="text-[8px] bg-[#f4f7fb] text-[#2d5790] px-2 py-0.5 rounded-full font-black uppercase tracking-tighter">AI Beta</span>
               </div>
             </motion.div>
           ))}

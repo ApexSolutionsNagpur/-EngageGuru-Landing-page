@@ -40,7 +40,7 @@ export default function FloatingActions() {
         className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-green-300/50 transition-all cursor-pointer relative group"
         aria-label="Chat on WhatsApp"
       >
-        <MessageCircle size={28} className="fill-white" />
+        <i className="bi bi-whatsapp text-3xl text-white"></i>
         <span className="absolute right-full mr-3 px-2 py-1 bg-gray-900 text-white text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
           Chat with us
         </span>
