@@ -4,10 +4,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Send, CheckCircle2, Loader2, Phone, Mail, AlertCircle } from "lucide-react";
 
-// API Configuration - Update these for production
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
-const API_KEY = process.env.NEXT_PUBLIC_ONBOARD_API_KEY || "onb_aca4b1d27c4b77d384a73d4e0b0527e1d11797009c8166fb2ec9474e29acacaa6";
-
 // Fallback industries in case API fails
 const FALLBACK_INDUSTRIES = ["Sales", "Real Estate", "School / Institute", "Other"];
 
@@ -47,25 +43,15 @@ export default function OnboardingForm() {
     email: "",
   });
 
-  // Common headers for API requests
-  const getHeaders = (includeContentType = false) => {
-    const headers: HeadersInit = {
-      "Accept": "application/json",
-      "X-Onboard-Key": API_KEY,
-    };
-    if (includeContentType) {
-      headers["Content-Type"] = "application/json";
-    }
-    return headers;
-  };
-
   // Fetch industries from API on component mount
   useEffect(() => {
     const fetchIndustries = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/public/onboard/industries`, {
+        const response = await fetch(`/api/onboard/industries`, {
           method: "GET",
-          headers: getHeaders(),
+          headers: {
+            "Accept": "application/json",
+          },
         });
 
         if (!response.ok) {
@@ -80,7 +66,6 @@ export default function OnboardingForm() {
         }
       } catch (err) {
         console.warn("Error fetching industries, using fallback:", err);
-        // Keep using fallback industries
       } finally {
         setIndustriesLoading(false);
       }
@@ -92,7 +77,6 @@ export default function OnboardingForm() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (error) setError(null);
   };
 
@@ -102,7 +86,6 @@ export default function OnboardingForm() {
     setError(null);
 
     try {
-      // Get UTM parameters from URL if present
       const urlParams = new URLSearchParams(window.location.search);
       const utmData = {
         utm_source: urlParams.get("utm_source") || undefined,
@@ -112,14 +95,16 @@ export default function OnboardingForm() {
         utm_content: urlParams.get("utm_content") || undefined,
       };
 
-      // Filter out undefined values
       const cleanUtmData = Object.fromEntries(
         Object.entries(utmData).filter(([_, v]) => v !== undefined)
       );
 
-      const response = await fetch(`${API_BASE_URL}/api/v1/public/onboard`, {
+      const response = await fetch(`/api/onboard/submit`, {
         method: "POST",
-        headers: getHeaders(true),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           ...formData,
           ...cleanUtmData,
@@ -128,13 +113,11 @@ export default function OnboardingForm() {
 
       const data: ApiResponse = await response.json();
 
-      // Handle different error status codes
       if (response.status === 401) {
         throw new Error("Authentication error. Please refresh and try again.");
       }
 
       if (response.status === 422) {
-        // Validation error - extract first error message
         const validationErrors = (data as any).errors;
         if (validationErrors) {
           const firstError = Object.values(validationErrors)[0];
@@ -180,7 +163,6 @@ export default function OnboardingForm() {
             Our team will contact you within 2 hours to set up your EngageGuru CRM. Get ready to grow!
           </p>
           
-          {/* Contact Options */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             <a
               href="https://wa.me/918669001770?text=Hi%20EngageGuru!%20I%20just%20submitted%20my%20CRM%20request.%20Looking%20forward%20to%20connecting!"
@@ -210,7 +192,6 @@ export default function OnboardingForm() {
     <section id="launch" className="py-24 bg-gray-50 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
-          {/* Form Info Side */}
           <div className="md:w-1/3 bg-[#2d5790] p-12 text-white flex flex-col justify-center">
             <div className="mb-8 p-3 bg-white rounded-2xl w-fit shadow-sm">
               <img src="/logo1080x1080.png" alt="EngageGuru Logo" className="w-16 h-16 object-contain" />
@@ -233,7 +214,6 @@ export default function OnboardingForm() {
               ))}
             </ul>
 
-            {/* Contact Info */}
             <div className="mt-10 pt-8 border-t border-white/20 space-y-3">
               <a href="mailto:crm@engageguru.in" className="flex items-center space-x-3 text-[#dfdbd8] hover:text-white transition-colors">
                 <Mail size={18} />
@@ -246,10 +226,8 @@ export default function OnboardingForm() {
             </div>
           </div>
 
-          {/* Form Side */}
           <div className="md:w-2/3 p-12 lg:p-16">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Error Message */}
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
