@@ -3,11 +3,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, MessageCircle } from "lucide-react";
+import Clarity from "@microsoft/clarity";
 
 export default function FloatingActions() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
+    // Initialize Microsoft Clarity
+    const clarityId = "yourProjectId"; // Replace with your Clarity Project ID
+    if (clarityId !== "yourProjectId") {
+      Clarity.init(clarityId);
+    }
+
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowScrollTop(true);
