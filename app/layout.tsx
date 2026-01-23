@@ -24,8 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-      </head>
-      <body className={inter.className}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-FFPS2188JC"
           strategy="afterInteractive"
@@ -39,6 +37,8 @@ export default function RootLayout({
             gtag('config', 'G-FFPS2188JC');
           `}
         </Script>
+      </head>
+      <body className={inter.className}>
         {children}
         <FloatingActions />
         {/* <AmbientLogo /> */}
