@@ -10,10 +10,7 @@ export default function FloatingActions() {
 
   useEffect(() => {
     // Initialize Microsoft Clarity
-    const clarityId = "yourProjectId"; // Replace with your Clarity Project ID
-    if (clarityId !== "yourProjectId") {
-      Clarity.init(clarityId);
-    }
+    Clarity.init("v601il0b3i");
 
     const handleScroll = () => {
       if (window.scrollY > 400) {
