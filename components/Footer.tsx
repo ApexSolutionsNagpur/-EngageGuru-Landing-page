@@ -59,15 +59,15 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-500">
               <li className="flex items-start space-x-2">
                 <span className="text-[#2d5790]">📧</span>
-                <a href="mailto:crm@engageguru.in" className="hover:text-[#2d5790] transition-colors">crm@engageguru.in</a>
+                <a href="mailto:crm@engageguru.in" onClick={() => (window as any).gtag?.('event', 'contact_email', { event_category: 'Contact', event_label: 'Footer Email' })} className="hover:text-[#2d5790] transition-colors">crm@engageguru.in</a>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="text-[#2d5790]">📞</span>
-                <a href="tel:+918669001770" className="hover:text-[#2d5790] transition-colors">+91 86690 01770</a>
+                <a href="tel:+918669001770" onClick={() => (window as any).gtag?.('event', 'contact_call', { event_category: 'Contact', event_label: 'Footer Call' })} className="hover:text-[#2d5790] transition-colors">+91 86690 01770</a>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="text-green-500">💬</span>
-                <a href="https://wa.me/918669001770" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition-colors">WhatsApp Us</a>
+                <a href="https://wa.me/918669001770" target="_blank" rel="noopener noreferrer" onClick={() => (window as any).gtag?.('event', 'contact_whatsapp', { event_category: 'Contact', event_label: 'Footer WhatsApp' })} className="hover:text-green-600 transition-colors">WhatsApp Us</a>
               </li>
             </ul>
             <div className="mt-6 pt-4 border-t border-gray-200">

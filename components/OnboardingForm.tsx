@@ -136,6 +136,15 @@ export default function OnboardingForm() {
 
       if (data.success) {
         setIsSubmitted(true);
+        // Track form submission event in GA4
+        if (typeof window !== "undefined" && (window as any).gtag) {
+          (window as any).gtag("event", "generate_lead", {
+            business_name: formData.business_name,
+            industry: formData.industry,
+            event_category: "Onboarding",
+            event_label: "Main Form Submission"
+          });
+        }
       } else {
         throw new Error(data.message || "Submission failed. Please try again.");
       }
@@ -168,6 +177,7 @@ export default function OnboardingForm() {
               href="https://wa.me/918669001770?text=Hi%20EngageGuru!%20I%20just%20submitted%20my%20CRM%20request.%20Looking%20forward%20to%20connecting!"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => (window as any).gtag?.('event', 'contact_whatsapp', { event_category: 'Conversion', event_label: 'Success WhatsApp' })}
               className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-lg"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -177,6 +187,7 @@ export default function OnboardingForm() {
             </a>
             <a
               href="tel:+918669001770"
+              onClick={() => (window as any).gtag?.('event', 'contact_call', { event_category: 'Conversion', event_label: 'Success Call' })}
               className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold transition-all backdrop-blur-sm"
             >
               <Phone size={20} />
@@ -215,11 +226,11 @@ export default function OnboardingForm() {
             </ul>
 
             <div className="mt-10 pt-8 border-t border-white/20 space-y-3">
-              <a href="mailto:crm@engageguru.in" className="flex items-center space-x-3 text-[#dfdbd8] hover:text-white transition-colors">
+              <a href="mailto:crm@engageguru.in" onClick={() => (window as any).gtag?.('event', 'contact_email', { event_category: 'Contact', event_label: 'Sidebar Email' })} className="flex items-center space-x-3 text-[#dfdbd8] hover:text-white transition-colors">
                 <Mail size={18} />
                 <span>crm@engageguru.in</span>
               </a>
-              <a href="tel:+918669001770" className="flex items-center space-x-3 text-[#dfdbd8] hover:text-white transition-colors">
+              <a href="tel:+918669001770" onClick={() => (window as any).gtag?.('event', 'contact_call', { event_category: 'Contact', event_label: 'Sidebar Call' })} className="flex items-center space-x-3 text-[#dfdbd8] hover:text-white transition-colors">
                 <Phone size={18} />
                 <span>+91 86690 01770</span>
               </a>

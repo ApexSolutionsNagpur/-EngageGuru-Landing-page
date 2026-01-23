@@ -34,6 +34,14 @@ export default function FloatingActions() {
         href="https://wa.me/918669001770?text=May%20i%20know%20more%20about%20%22EngageGuru%20CRM%22" // WhatsApp link with pre-filled message
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => {
+          if (typeof window !== "undefined" && (window as any).gtag) {
+            (window as any).gtag("event", "contact_whatsapp", {
+              event_category: "Conversion",
+              event_label: "Floating WhatsApp Button"
+            });
+          }
+        }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.1 }}
